@@ -2,6 +2,7 @@
 import * as CredentialHandlerPolyfill from 'credential-handler-polyfill';
 import { useEffect } from 'react';
 import './App.css';
+import Certificate from './templates/certificate';
 
 function App() {
   const MEDIATOR =
@@ -59,17 +60,18 @@ function App() {
       }
     );
 
-    document.getElementById('storeResults').innerText = 'Storing credential...';
-
     // Use Credential Handler API to store
     const result = await navigator.credentials.store(webCredentialWrapper);
+    if (!result)
+      document.getElementById('storeResults').innerText =
+        'Storing credential...';
 
     document.getElementById('resultsPanel').classList.remove('hide');
-    document.getElementById('storeResults').innerText = JSON.stringify(
-      result,
-      null,
-      2
-    );
+    // document.getElementById('storeResults').innerText = JSON.stringify(
+    //   result,
+    //   null,
+    //   2
+    // );
 
     console.log('Result of receiving via store() request:', result);
     //
@@ -103,36 +105,39 @@ function App() {
   });
 
   return (
-    <div className='container'>
-      <div className='card-panel'>
-        <h5>Demo Issuer</h5>
-        <p>
-          If you have not yet picked a wallet and registered it with your
-          browser, try out the
-          <a href='https://localhost:3000/'> Demo Wallet</a>.
-        </p>
-
-        <p>
-          This is a minimal credential Issuer application that demonstrates how
-          a user would ask for a credential to be issued.
-        </p>
-
-        <p>
-          When you click the Store() button, a Verifiable Credential will be
-          issued and sent to your digital wallet for storage.
-        </p>
-
-        <button className='waves-effect waves-light btn' id='receiveButton'>
-          Issue and Store() a Credential
-        </button>
-      </div>
-
-      <div className='card-panel hide' id='resultsPanel'>
-        <h6>Result of store() operation:</h6>
-
-        <pre>
-          <code id='storeResults'></code>
-        </pre>
+    <div>
+      <div className='flex flex-col justify-center items-center min-h-screen'>
+        <div className='bg-white bg-opacity-70 rounded p-10 max-w-[70vw]'>
+          <img
+            src='https://upmsp.edu.in/images/logonamebig.png'
+            className='w-[500px] mx-auto mb-8'
+          />
+          {/* <h1 className="text-5xl font-bold text-center mt-5">माध्यमिक शिक्षा परिषद्, उत्तर प्रदेश</h1> */}
+          <p className='mt-8 text-center'>
+            माध्यमिक शिक्षा परिषद्, उत्तर प्रदेश, प्रयागराज हाईस्कूल एवं
+            इण्टरमीडिएट स्तर की परीक्षाओं को संचालित करने वाली विश्व की एक
+            सर्वौच्च संस्था है। इस प्रगतिशील युग में नित नवीन तकनीक के उपयोग के
+            बिना प्रगति की कल्पना भी नहीं की जा सकती है। माध्यमिक शिक्षा परिषद्
+            द्वारा भी इसी पथ का अनुसरण करते हुए प्रथम बार अपने पारम्परिक परिवेश
+            से बाहर निकल कर नवीन तकनीकी को अपनाते हुए शैक्षिक सत्र 2013-2014 से
+            अग्रिम पंजीकरण की समस्त कार्यवाहियों को इस नवसृजित वेबसाइट के माध्यम
+            से ऑनलाइन कराया गया, जो कि शतप्रतिशत सफल रहा था। इससे परिषदीय
+            कार्यों की गुणवत्ता एवं विश्वसनीयता में आशातीत वृद्धि हुई। इस सफलता
+            के लिये हम प्रदेश के समस्त शिक्षाधिकारियों एवं समस्त संस्थाओं के
+            प्रधानाचार्यो आदि का विशेष आभार व्यक्त करते है।
+          </p>
+          <button
+            id='receiveButton'
+            className='bg-blue-800 hover:bg-blue-900 text-white font-medium pt-1 pb-2 px-4 rounded focus:outline-none focus:shadow-outline mb-5 mt-10 w-full text-lg'>
+            Issue a Credential
+          </button>
+          <div className='card-panel hide' id='resultsPanel'>
+            <Certificate />
+            {/* <pre>
+              <div id='storeResults'></div>
+            </pre> */}
+          </div>
+        </div>
       </div>
     </div>
   );
