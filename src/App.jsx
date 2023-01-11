@@ -16,15 +16,15 @@ function App() {
       'https://www.w3.org/2018/credentials/examples/v1',
     ],
     id: 'http://example.edu/credentials/1872',
-    type: ['VerifiableCredential', 'UniversityDegreeCredential'],
-    issuer: 'https://example.edu/issuers/565049',
-    issuanceDate: '2010-01-01T19:53:24Z',
+    type: ['VerifiableCredential', '12th Marksheet'],
+    issuer: 'UP Board',
+    issuanceDate: '2023-01-01T19:53:24Z',
     credentialSubject: {
       id: 'did:example:ebfeb1f712ebc6f1c276e12ec21',
       alumniOf: {
         id: 'did:example:c276e12ec21ebfeb1f712ebc6f1',
         name: {
-          '@value': 'Example University',
+          '@value': 'UP Board',
           '@language': 'en',
         },
       },
@@ -110,6 +110,7 @@ function App() {
         <div className='bg-white bg-opacity-70 rounded p-10 max-w-[70vw]'>
           <img
             src='https://upmsp.edu.in/images/logonamebig.png'
+            alt='up-board-logo'
             className='w-[500px] mx-auto mb-8'
           />
           {/* <h1 className="text-5xl font-bold text-center mt-5">माध्यमिक शिक्षा परिषद्, उत्तर प्रदेश</h1> */}
@@ -126,11 +127,29 @@ function App() {
             के लिये हम प्रदेश के समस्त शिक्षाधिकारियों एवं समस्त संस्थाओं के
             प्रधानाचार्यो आदि का विशेष आभार व्यक्त करते है।
           </p>
-          <button
-            id='receiveButton'
-            className='bg-blue-800 hover:bg-blue-900 text-white font-medium pt-1 pb-2 px-4 rounded focus:outline-none focus:shadow-outline mb-5 mt-10 w-full text-lg'>
-            Issue a Credential
-          </button>
+          <div className='flex items-center'>
+            <div className='flex flex-col w-3/12 mr-2'>
+              <label
+                for='large'
+                class='block mb-2 text-base font-medium text-gray-900'>
+                Select Student
+              </label>
+              <select
+                id='large'
+                class='block py-3 px-4 w-full text-base text-white bg-[#1E40AF] rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500'>
+                <option selected>Choose a Student</option>
+                <option value='US'>Akash</option>
+                <option value='CA'>Aniket</option>
+                <option value='FR'>Rahul</option>
+                <option value='DE'>Pritam</option>
+              </select>
+            </div>
+            <button
+              id='receiveButton'
+              className='bg-blue-800 hover:bg-blue-900 text-white font-medium pt-1 pb-2 px-4 rounded focus:outline-none focus:shadow-outline mb-5 mt-12 w-full text-lg'>
+              Issue a Credential
+            </button>
+          </div>
           <div className='card-panel hide' id='resultsPanel'>
             <Certificate />
             {/* <pre>
